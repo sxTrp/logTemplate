@@ -1,0 +1,18 @@
+db.getCollection('market_program').insert({"case_name": "business_id", "api_type": "inc_business", "_value":10030});
+
+max_c_id = 10000
+var rows = db.getCollection('market_program').find({"api_type" : "business"});
+for(var i=0;i<rows.length();i++){
+    var r = rows[i];
+    var cid=max_c_id+i;
+    db.getCollection('market_program').update({_id: r._id}, {$set: {business_id:cid}});
+}
+
+
+db.getCollection('aggretest').aggregate([
+{$group: {_id: "1", a: {$push: "$a"}}},
+// {$project: {"a": {$concatArrays: ["$a_lst",['1','2']]}}}
+{$project: { a: {$reduce: {input: "$a", initialValue:[], in: { $concatArrays : ["$$value", "$$this"]}}}}}
+
+
+])

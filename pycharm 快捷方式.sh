@@ -1,0 +1,1 @@
+/home/sinb/Downloads/pycharm-2018.1.4/bin/pycharm.sh
